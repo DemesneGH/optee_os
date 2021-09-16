@@ -19,7 +19,7 @@
       displayName: 'Setting up $HOME'
     - script: |
         cd incubator-teaclave-trustzone-sdk &&
-        source environment &&
+        source environment
         make optee &&
         . ~/.cargo/env &&
         rustup default nightly-2019-07-08 &&
