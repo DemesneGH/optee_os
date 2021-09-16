@@ -18,6 +18,7 @@
         ln -sf /root/.cargo ~/.cargo
       displayName: 'Setting up $HOME'
     - script: |
+        cd incubator-teaclave-trustzone-sdk &&
         source environment &&
         make optee &&
         . ~/.cargo/env &&
