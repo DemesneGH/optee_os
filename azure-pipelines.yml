@@ -3,16 +3,32 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
+jobs:
 
-pool: Default
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - job: build-and-run-rust-examples
+    pool: Default
+    container:
+      image: teaclave/teaclave-trustzone-sdk-build:0.2.1
+    steps:
+    - script: |
+        echo Hello, world!
+        git clone git@github.com:apache/incubator-teaclave-trustzone-sdk.git
+        cd incubator-teaclave-trustzone-sdk
+        ./setup.sh
+        git submodule update --init -- optee
+      displayName: 'Checkout repository'
+    - script: |
+        cp /root/.bashrc $HOME/.bashrc &&
+        ln -sf /root/.rustup ~/.rustup &&
+        ln -sf /root/.cargo ~/.cargo
+      displayName: 'Setting up $HOME'
+    - script: |
+        source environment &&
+        make optee &&
+        . ~/.cargo/env &&
+        rustup default nightly-2019-07-08 &&
+        make examples
+      displayName: 'Building'
+    - script: |
+        cd ci && ./ci.sh
+      displayName: 'Run tests and examples'
