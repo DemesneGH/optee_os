@@ -3,9 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-jobs:
 
-  - job: build_and_run_rust_examples
     pool: Default
     container:
       image: teaclave/teaclave-trustzone-sdk-build:0.2.1
