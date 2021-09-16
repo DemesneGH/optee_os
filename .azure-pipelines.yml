@@ -1,8 +1,7 @@
 jobs:
   - job: QEMUv8_check
     displayName: 'Run regression tests (xtest) in QEMUv8'
-    pool:
-      vmImage: ubuntu-18.04
+    pool: Default
     container:
       image: jforissier/optee_os_ci:qemuv8_check
     steps:
