@@ -16,6 +16,7 @@
     - script: |
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
+        export CURL_CA_BUNDLE=/azp/cacert.pem
       displayName: 'Setting up $HOME'
     - script: |
         cd incubator-teaclave-trustzone-sdk &&
