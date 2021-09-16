@@ -5,8 +5,6 @@
 
 
     pool: Default
-    container:
-      image: teaclave/teaclave-trustzone-sdk-build:0.2.1
     steps:
     - script: |
         echo Hello, world!
