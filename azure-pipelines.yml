@@ -3,7 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-    pool: ubuntu-18.04
+    pool: 
+      vmImage: ubuntu-18.04
     container:
       image: teaclave/teaclave-trustzone-sdk-build:0.2.1
     steps:
