@@ -3,20 +3,20 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-
-    pool: Default
+    pool: ubuntu-20.04
+    container:
+      image: teaclave/teaclave-trustzone-sdk-build:0.2.1
     steps:
     - script: |
-        echo Hello, world!
         git clone https://github.com/apache/incubator-teaclave-trustzone-sdk.git
         cd incubator-teaclave-trustzone-sdk
         ./setup.sh
         git submodule update --init -- optee
       displayName: 'Checkout repository'
     - script: |
+        cp /root/.bashrc $HOME/.bashrc &&
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
-        export CURL_CA_BUNDLE=/azp/cacert.pem
       displayName: 'Setting up $HOME'
     - script: |
         cd incubator-teaclave-trustzone-sdk &&
@@ -27,5 +27,6 @@
         make examples
       displayName: 'Building'
     - script: |
-        cd ci && ./ci.sh
+        cd incubator-teaclave-trustzone-sdk/ci &&
+        ./ci.sh
       displayName: 'Run tests and examples'
