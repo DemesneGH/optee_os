@@ -15,7 +15,7 @@
         git submodule update --init -- optee
       displayName: 'Checkout repository'
     - script: |
-        cp /root/.bashrc $HOME/.bashrc &&
+        sudo cp /root/.bashrc $HOME/.bashrc &&
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
       displayName: 'Setting up $HOME'
